@@ -12,13 +12,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   error.style.display = 'none';
 
   try {
+    breedSelect.addClass('hidden');
+    loader.style.display = 'block';
+
     const breeds = await fetchBreeds();
     breeds.forEach(breed => {
       breedSelect.append(new Option(breed.name, breed.id));
     });
+
+    breedSelect.removeClass('hidden');
   } catch (err) {
     console.error(err);
     breedSelect.append(new Option('Nie udało się pobrać danych', ''));
+  } finally {
+    loader.style.display = 'none';
   }
 
   breedSelect.on('change', () => {
