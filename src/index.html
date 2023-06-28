@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page title</title>
+    <link rel="stylesheet" href="/notiflix-Notiflix-6936fff/dist/notiflix-3.2.6.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
     <link rel="stylesheet" href="./sass/index.scss" />
-    <script type="module" src="./index.js"></script>
+    <title>Search Cats</title>
+    <script src="/notiflix-Notiflix-6936fff/dist/notiflix-3.2.6.min.js"></script>
+    
   </head>
   <body>
-    <!-- ❗️❗️❗️ Add partials like so for every page -->
-    <include src="./partials/example.html"></include>
+    <select class="breed-select"></select>
+  <span class="loader"></span>
+  <p class="error">Coś poszło nie tak. Przeładuj stronę.</p>
+  <div class="cat-info"></div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <script src="./cat-api.js" type="module"></script>
+  <script src="./index.js" type="module"></script>
   </body>
 </html>
