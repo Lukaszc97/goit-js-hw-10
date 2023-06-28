@@ -1,0 +1,52 @@
+body {
+  padding-top: 15px;
+  background-color: rgb(214, 181, 181);
+  margin: auto;
+  width: 50%;
+}
+
+img {
+  margin-top: 10px;
+  width: 100%;
+  height: auto;
+}
+
+.loader,
+.error {
+  display: none;
+}
+
+.loader {
+  margin: auto;
+  margin-top: 40%;
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border-radius: 50%;
+  position: relative;
+  animation: roll 1s ease-in-out infinite alternate;
+}
+
+.loader:after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 5px solid;
+  border-color: #ff3d00 transparent;
+}
+
+@keyframes roll {
+  0% {
+    transform: translateX(-150%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(150%) rotate(360deg);
+  }
+}
+
+.error {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+}
