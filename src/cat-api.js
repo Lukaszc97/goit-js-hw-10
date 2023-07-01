@@ -3,18 +3,18 @@ const apiKey = 'live_hlj1KYddLVWkCVUVx8C7Vmbi5HYraIfdgjOUiP55UwVq2bWAPZXqQV15zAW
 export function fetchBreeds() {
   const url = 'https://api.thecatapi.com/v1/breeds';
 
-  return fetch(url, {
-    headers: {
-      'x-api-key': apiKey
-    }
-  })
+  return axios
+    .get(url, {
+      headers: {
+        'x-api-key': apiKey
+      }
+    })
     .then(response => {
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error('Nie udało się pobrać ras');
       }
-      return response.json();
+      return response.data;
     })
-    .then(data => data)
     .catch(error => {
       throw new Error(error);
     });
@@ -23,18 +23,18 @@ export function fetchBreeds() {
 export function fetchCatByBreed(breedId) {
   const url = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`;
 
-  return fetch(url, {
-    headers: {
-      'x-api-key': apiKey
-    }
-  })
+  return axios
+    .get(url, {
+      headers: {
+        'x-api-key': apiKey
+      }
+    })
     .then(response => {
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error('Nie udało się pobrać informacji o kocie');
       }
-      return response.json();
+      return response.data[0];
     })
-    .then(data => data[0])
     .catch(error => {
       throw new Error(error);
     });

@@ -1,8 +1,7 @@
 import { fetchBreeds, fetchCatByBreed } from './cat-api.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const breedSelect = $('.breed-select');
-
+  const breedSelect = document.querySelector('.breed-select');
   const loader = document.querySelector('.loader');
   const catInfo = document.querySelector('.cat-info');
   const error = document.querySelector('.error');
@@ -12,24 +11,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   error.style.display = 'none';
 
   try {
-    breedSelect.addClass('hidden');
+    breedSelect.classList.add('hidden');
     loader.style.display = 'block';
 
     const breeds = await fetchBreeds();
     breeds.forEach(breed => {
-      breedSelect.append(new Option(breed.name, breed.id));
+      const option = document.createElement('option');
+      option.text = breed.name;
+      option.value = breed.id;
+      breedSelect.appendChild(option);
     });
 
-    breedSelect.removeClass('hidden');
+    breedSelect.classList.remove('hidden');
   } catch (err) {
     console.error(err);
-    breedSelect.append(new Option('Nie udało się pobrać danych', ''));
+    const option = document.createElement('option');
+    option.text = 'Nie udało się pobrać danych';
+    option.value = '';
+    breedSelect.appendChild(option);
   } finally {
     loader.style.display = 'none';
   }
 
-  breedSelect.on('change', () => {
-    const breedId = breedSelect.val();
+  breedSelect.addEventListener('change', () => {
+    const breedId = breedSelect.value;
 
     if (!breedId) {
       catInfo.innerHTML = '';
@@ -58,6 +63,4 @@ document.addEventListener('DOMContentLoaded', async () => {
         loader.style.display = 'none';
       });
   });
-
-  breedSelect.select2();
 });
